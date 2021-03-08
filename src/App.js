@@ -62,8 +62,8 @@ class App extends Component {
             return (
               <div className="flex-parent">
                 <button className="delete-button"
-                      onClick={() => this.deleteItem(item.id)}>
-                      X
+                      onClick={() => {if (window.confirm('Are you sure you wish to delete this note?'))this.deleteItem(item.id) } }>
+                      x
                 </button>
                   <li key={item.id}>
                     {item.value}
