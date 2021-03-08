@@ -54,7 +54,7 @@ class App extends Component {
             value={this.state.newItem}
             onChange={e => this.updateInput("newItem", e.target.value)}
           />
-          <Button className="addButton" variant="primary" block onClick={() => this.addItem()}
+          <Button className="addButton" block onClick={() => this.addItem()}
           > Add </Button>
         </div>
         <ul>
