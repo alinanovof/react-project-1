@@ -8,6 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
       newItem: "",
+      title: "",
       list: [],
     }
   }
@@ -21,7 +22,8 @@ class App extends Component {
     const newItem = {
       id: 1 + Math.random(),
       value: this.state.newItem.slice(),
-      createdDate: new Date()
+      createdDate: new Date(),
+      title: this.state.title,
     };
 
     const list = [...this.state.list];
@@ -31,7 +33,7 @@ class App extends Component {
     this.setState({
       list,
       newItem: "",
-      
+      title: "",
     })
   }
 
@@ -49,6 +51,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="card">
+          <input type="text" placeholder="Title" value={this.state.title}
+            onChange={e => this.updateInput("title", e.target.value)}></input>
           <textarea
             placeholder="Your note..."
             value={this.state.newItem}
@@ -61,16 +65,21 @@ class App extends Component {
           {this.state.list.map(item => {
             return (
               <div className="flex-parent">
-                <button className="delete-button"
-                      onClick={() => {if (window.confirm('Are you sure you wish to delete this note?'))this.deleteItem(item.id) } }>
-                      x
-                </button>
-                  <li key={item.id}>
-                    {item.value}
-                  </li>
-              <p className="created-date">{item.createdDate.toLocaleString()}</p>
+                <div className="inside-flex">
+                  <h2 className="title">{item.title}</h2>
+                   <button className="delete-button"
+                    onClick={() => 
+                      { if (window.confirm('Are you sure you wish to delete this note?')) 
+                    this.deleteItem(item.id) }}>
+                    x
+                    </button>
+                </div>
+                <li key={item.id}>
+                  {item.value}
+                </li>
+                <p className="created-date">{item.createdDate.toLocaleString()}</p>
               </div>
-              
+
             )
           })}
         </ul>
