@@ -1,6 +1,8 @@
 import './App.css';
 import { Component } from 'react';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal'
+
 
 
 class App extends Component {
@@ -10,8 +12,12 @@ class App extends Component {
       newItem: "",
       title: "",
       list: [],
+      isOpen: false,
     }
   }
+
+  openModal = () => this.setState({ isOpen: true });
+  closeModal = () => this.setState({ isOpen: false });
 
   updateInput(key, value) {
     this.setState({
@@ -67,16 +73,23 @@ class App extends Component {
               <div className="flex-parent">
                 <div className="inside-flex">
                   <h2 className="title">{item.title}</h2>
-                   <button className="delete-button"
-                    onClick={() => 
-                      { if (window.confirm('Are you sure you wish to delete this note?')) 
-                    this.deleteItem(item.id) }}>
+                  <button className="delete-button"
+                    onClick={() => {
+                      if (window.confirm('Are you sure you wish to delete this note?'))
+                        this.deleteItem(item.id)
+                    }}>
                     x
                     </button>
                 </div>
-                <li key={item.id}>
+                <li key={item.id} onClick={this.openModal}>
                   {item.value}
                 </li>
+                <Modal key={item.id} show={this.state.isOpen} onHide={this.closeModal}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>{item.title}</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{item.value}</Modal.Body>
+                </Modal>
                 <p className="created-date">{item.createdDate.toLocaleString()}</p>
               </div>
 
@@ -87,6 +100,5 @@ class App extends Component {
     )
   }
 }
-
 
 export default App;
