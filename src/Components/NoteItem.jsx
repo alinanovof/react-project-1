@@ -5,7 +5,7 @@ class NoteItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            list: []
         }
     }
 
@@ -18,8 +18,9 @@ class NoteItem extends Component {
 
         // filter out item being deleted
         const updatedList = list.filter(item => item.id !== id);
-
-        this.setState({ list: updatedList });
+        this.setState({
+            list: updatedList
+        })
     }
 
     render() {

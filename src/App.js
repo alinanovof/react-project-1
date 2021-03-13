@@ -17,16 +17,6 @@ class App extends Component {
     return { list: prevState.list.map(item => editedNote.id === item.id ? editedNote : item) }
   });
 
-  // deleteItem(id) {
-  //   //copy current list of items
-  //   const list = [...this.state.list];
-
-  //   // filter out item being deleted
-  //   const updatedList = list.filter(item => item.id !== id);
-
-  //   this.setState({ list: updatedList });
-  // }
-
   render() {
     return (
       <div className="App">
